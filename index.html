@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxRequest | HTTP Utility</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="glow-orb orb-1"></div>
+<div class="glow-orb orb-2"></div>
+
+<div class="container">
+
+    <header>
+        <div class="logo-wrap">
+            <div class="logo-icon"><img src="logo.png" alt="Logo"></div>
+            <div class="logo-pulse"></div>
+        </div>
+        <div class="header-text">
+            <h1>Fox<span>Request</span></h1>
+            <p class="tagline">HTTP CLIENT <span class="version">v2.0</span></p>
+        </div>
+        <div class="header-status">
+            <div class="status-dot active"></div>
+            <span>READY</span>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="request-box">
+            <div class="request-label">REQUEST</div>
+            <div class="input-group">
+                <div class="method-wrap">
+                    <select id="method">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PATCH">PATCH</option>
+                    </select>
+                </div>
+                <div class="url-wrap">
+                    <span class="url-icon">⌁</span>
+                    <input type="text" id="url" placeholder="https://api.example.com/endpoint" value="https://jsonplaceholder.typicode.com/todos/1">
+                </div>
+                <button id="send-btn">
+                    <span class="btn-text">SEND</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="grid">
+
+            <section class="response-area">
+                <div class="area-header">
+                    <div class="area-title">
+                        <span class="area-dot"></span>
+                        RESPONSE
+                    </div>
+                    <div class="response-meta">
+                        <div id="status-badge" class="status-badge"></div>
+                        <div id="timing-badge" class="timing-badge"></div>
+                    </div>
+                </div>
+                <div class="response-body-wrap">
+                    <div class="line-numbers" id="line-numbers"></div>
+                    <pre id="response-body">// Prêt pour une requête...
+// Sélectionnez une méthode HTTP et entrez une URL</pre>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+
+                <section class="history-area">
+                    <div class="area-header">
+                        <div class="area-title">
+                            <span class="area-dot"></span>
+                            HISTORIQUE
+                        </div>
+                        <button id="clear-history" class="clear-btn">✕ EFFACER</button>
+                    </div>
+                    <div id="history-list" class="history-list"></div>
+                </section>
+
+                <section class="info-area">
+                    <div class="area-header">
+                        <div class="area-title">
+                            <span class="area-dot"></span>
+                            STATS
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-value" id="stat-total">0</span>
+                            <span class="stat-label">Requêtes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="stat-ok">0</span>
+                            <span class="stat-label">Succès</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="stat-err">0</span>
+                            <span class="stat-label">Erreurs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="stat-avg">—</span>
+                            <span class="stat-label">Moy. ms</span>
+                        </div>
+                    </div>
+                </section>
+
+            </aside>
+
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
