@@ -1,5 +1,3 @@
-/* ── FoxRequest v2 ── script.js ── */
-
 const sendBtn       = document.getElementById('send-btn');
 const urlInput      = document.getElementById('url');
 const methodSelect  = document.getElementById('method');
@@ -15,7 +13,6 @@ const statOk        = document.getElementById('stat-ok');
 const statErr       = document.getElementById('stat-err');
 const statAvg       = document.getElementById('stat-avg');
 
-/* ── STATE ── */
 let history = [];
 let stats   = { total: 0, ok: 0, err: 0, times: [] };
 
@@ -25,7 +22,6 @@ try {
     stats   = stored.stats   || stats;
 } catch {}
 
-/* ── HELPERS ── */
 function setDot(state) {
     statusDot.className = 'status-dot ' + state;
     const map = { active: 'READY', loading: 'SENDING…', error: 'ERROR' };
@@ -38,7 +34,6 @@ function updateLineNumbers(text) {
 }
 
 function syntaxHighlight(json) {
-    // basic highlight using spans
     return JSON.stringify(json, null, 4)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
@@ -54,7 +49,6 @@ function syntaxHighlight(json) {
         });
 }
 
-/* ── RENDER HISTORY ── */
 function renderHistory() {
     if (history.length === 0) {
         historyList.innerHTML = '<div class="hi-empty">AUCUNE REQUÊTE</div>';
@@ -67,7 +61,6 @@ function renderHistory() {
         </div>
     `).join('');
 
-    // Re-use from history on click
     historyList.querySelectorAll('.history-item').forEach(el => {
         el.addEventListener('click', () => {
             const h = history[+el.dataset.index];
@@ -78,7 +71,6 @@ function renderHistory() {
     });
 }
 
-/* ── RENDER STATS ── */
 function renderStats() {
     statTotal.textContent = stats.total;
     statOk.textContent    = stats.ok;
@@ -88,12 +80,10 @@ function renderStats() {
         : '—';
 }
 
-/* ── SAVE STATE ── */
 function saveState() {
     localStorage.setItem('foxHistory', JSON.stringify({ history, stats }));
 }
 
-/* ── HANDLE REQUEST ── */
 async function handleRequest() {
     const url    = urlInput.value.trim();
     const method = methodSelect.value;
@@ -135,12 +125,10 @@ async function handleRequest() {
         responseBody.className = '';
         responseBody.innerHTML = displayed;
 
-        // Add inline CSS for highlight classes if not already present
         injectHighlightStyles();
 
         updateLineNumbers(isJson ? JSON.stringify(parsed, null, 4) : text);
 
-        // Badge
         statusBadge.textContent  = `${res.status} ${res.statusText || 'OK'}`;
         statusBadge.className    = `status-badge ${res.ok ? 'ok' : 'err'}`;
         timingBadge.textContent  = `${ms}ms`;
@@ -148,11 +136,9 @@ async function handleRequest() {
 
         setDot(res.ok ? 'active' : 'error');
 
-        // History
         history.unshift({ method, url, ok: res.ok, status: res.status });
         history = history.slice(0, 10);
 
-        // Stats
         stats.total++;
         if (res.ok) stats.ok++; else stats.err++;
         stats.times.push(ms);
@@ -182,7 +168,6 @@ async function handleRequest() {
     }
 }
 
-/* ── SYNTAX HIGHLIGHT STYLE INJECTION ── */
 let highlightInjected = false;
 function injectHighlightStyles() {
     if (highlightInjected) return;
@@ -198,7 +183,6 @@ function injectHighlightStyles() {
     document.head.appendChild(style);
 }
 
-/* ── EVENTS ── */
 sendBtn.addEventListener('click', handleRequest);
 
 urlInput.addEventListener('keydown', e => {
@@ -213,7 +197,6 @@ document.getElementById('clear-history').addEventListener('click', () => {
     renderStats();
 });
 
-/* ── INIT ── */
 renderHistory();
 renderStats();
 updateLineNumbers(responseBody.textContent);

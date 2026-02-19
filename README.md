@@ -1,6 +1,6 @@
 # FoxRequest
 
-**FoxRequest** est un client HTTP minimaliste et ultra-léger conçu pour tester des APIs rapidement. C'est mon alternative "mini-Postman" sans aucune dépendance, intégrée à l'écosystème FoxHub.
+**FoxRequest** est un client HTTP minimaliste et ultra-léger conçu pour tester des APIs rapidement. C'est mon alternative "mini-Postman" sans aucune dépendance, intégrée à l'écosystème FoxHub. (Design généré par IA)
 
 ## 🌐 Utilisation
 L'outil est accessible directement en ligne, sans rien installer :
